@@ -839,3 +839,4 @@ C:\Users\dostojic\Desktop\Dimitrije\WebShop.API\obj\Debug\net8.0\refint\WebShop.
 C:\Users\dostojic\Desktop\Dimitrije\WebShop.API\obj\Debug\net8.0\WebShop.API.pdb
 C:\Users\dostojic\Desktop\Dimitrije\WebShop.API\obj\Debug\net8.0\WebShop.API.genruntimeconfig.cache
 C:\Users\dostojic\Desktop\Dimitrije\WebShop.API\obj\Debug\net8.0\ref\WebShop.API.dll
+C:\Users\dostojic\Desktop\Dimitrije\WebShop.API\obj\Debug\net8.0\WebShop.API.sourcelink.json

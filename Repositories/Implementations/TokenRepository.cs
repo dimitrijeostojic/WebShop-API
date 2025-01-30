@@ -20,8 +20,8 @@ namespace WebShop.API.Repositories.Implementations
         {
             //Create claims
             var claims = new List<Claim>();
-            claims.Add(new Claim(ClaimTypes.Email, user.Email));
             claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id));
+            claims.Add(new Claim(ClaimTypes.Name, user.UserName));
             foreach (var role in roles)
             {
                 claims.Add(new Claim(ClaimTypes.Role, role));

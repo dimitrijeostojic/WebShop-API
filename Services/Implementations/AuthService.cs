@@ -10,10 +10,11 @@ namespace WebShop.API.Services.Implementations
 {
     public class AuthService : IAuthService
     {
-        private readonly UserManager<IdentityUser> userManager;
+        private readonly UserManager<ApplicationUser> userManager;
         private readonly ITokenRepository tokenRepository;
+        private string regularUser = "RegularUser";
 
-        public AuthService(UserManager<IdentityUser> userManager, ITokenRepository tokenRepository)
+        public AuthService(UserManager<ApplicationUser> userManager, ITokenRepository tokenRepository)
         {
             this.userManager = userManager;
             this.tokenRepository = tokenRepository;
@@ -22,7 +23,7 @@ namespace WebShop.API.Services.Implementations
         public async Task<object> Login(LoginRequestDto loginRequestDto)
         {
             //pronalazenje korisnika po email adresi
-            var user = await userManager.FindByEmailAsync(loginRequestDto.Username);
+            var user = await userManager.FindByNameAsync(loginRequestDto.Username);
             if (user != null)
             {
                 //provera lozinke
@@ -47,11 +48,19 @@ namespace WebShop.API.Services.Implementations
 
         public async Task<object> Register(RegisterRequestDto registerRequestDto)
         {
+            var existingUser = await userManager.FindByNameAsync(registerRequestDto.Username);
+            if (existingUser != null)
+            {
+                return null;
+            }
+
             //kreiranje identity user korisnika
-            var identityUser = new IdentityUser
+            var identityUser = new ApplicationUser
             {
                 UserName = registerRequestDto.Username,
-                Email = registerRequestDto.Username
+                Email = registerRequestDto.Email,
+                FirstName = registerRequestDto.FirstName,
+                LastName = registerRequestDto.LastName
             };
             //kreiranje korisnika u sistemu
             var identityResult = await userManager.CreateAsync(identityUser, registerRequestDto.Password);
@@ -59,22 +68,21 @@ namespace WebShop.API.Services.Implementations
             //dodavanje uloga korisniku ako je registracija uspesna
             if (identityResult.Succeeded)
             {
-                if (registerRequestDto.Roles != null && registerRequestDto.Roles.Any())
-                {
-                    identityResult = await userManager.AddToRolesAsync(identityUser, registerRequestDto.Roles);
 
-                    if (identityResult.Succeeded)
+                identityResult = await userManager.AddToRoleAsync(identityUser, regularUser);
+
+                if (identityResult.Succeeded)
+                {
+                    var user = await userManager.FindByNameAsync(registerRequestDto.Username);
+                    var roles = await userManager.GetRolesAsync(user);
+                    var jwtToken = tokenRepository.CreateJwtToken(user, roles.ToList());
+
+                    return new
                     {
-                        var user = await userManager.FindByEmailAsync(registerRequestDto.Username);
-                        var roles = registerRequestDto.Roles;
-                        var jwtToken = tokenRepository.CreateJwtToken(user, roles.ToList());
-                       
-                        return new
-                        {
-                            JwtToken = jwtToken
-                        };
-                    }
+                        JwtToken = jwtToken
+                    };
                 }
+
             }
 
             return null;

@@ -16,28 +16,27 @@ namespace WebShop.API.Data
         public DbSet<Order> Order { get; set; }
         public DbSet<OrderItem> OrderItem { get; set; }
         public DbSet<Product> Product { get; set; }
-        public DbSet<User> User { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // User -> Cart (1:1)
-            modelBuilder.Entity<User>()
-                .HasOne(u => u.Cart)
-                .WithOne(c => c.User)
-                .HasForeignKey<Cart>(c => c.UserId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
 
+            //// User -> Cart (1:1)
+            //modelBuilder.Entity<ApplicationUser>()
+            //    .HasOne(u => u.Cart)
+            //    .WithOne(c => c.User)
+            //    .HasForeignKey<Cart>(c => c.UserId)  // <-- jasno definišemo FK
+            //    .IsRequired()
+            //    .OnDelete(DeleteBehavior.Cascade);
 
-            // User -> Order (1:*)
-            modelBuilder.Entity<User>()
-                .HasMany(u => u.Orders)
-                .WithOne(o => o.User)
-                .HasForeignKey(o => o.UserId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
+            //// User -> Order (1:N)
+            //modelBuilder.Entity<ApplicationUser>()
+            //    .HasMany(u => u.Orders)
+            //    .WithOne(o => o.User)
+            //    .HasForeignKey(o => o.UserId)
+            //    .IsRequired()
+            //    .OnDelete(DeleteBehavior.Cascade);
 
-            // Cart -> CartItem (1:*)
+            // Cart -> CartItem (1:N)
             modelBuilder.Entity<Cart>()
                 .HasMany(c => c.CartItems)
                 .WithOne(ci => ci.Cart)
@@ -45,7 +44,7 @@ namespace WebShop.API.Data
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // CartItem -> Product (*:1)
+            // CartItem -> Product (N:1)
             modelBuilder.Entity<CartItem>()
                 .HasOne(ci => ci.Product)
                 .WithMany(p => p.CartItems)
@@ -53,7 +52,7 @@ namespace WebShop.API.Data
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Order -> OrderItem (1:*)
+            // Order -> OrderItem (1:N)
             modelBuilder.Entity<Order>()
                 .HasMany(o => o.OrderItems)
                 .WithOne(oi => oi.Order)
@@ -61,7 +60,7 @@ namespace WebShop.API.Data
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // OrderItem -> Product (*:1)
+            // OrderItem -> Product (N:1)
             modelBuilder.Entity<OrderItem>()
                 .HasOne(oi => oi.Product)
                 .WithMany(p => p.OrderItems)
@@ -69,7 +68,7 @@ namespace WebShop.API.Data
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Product -> Category (*:1)
+            // Product -> Category (N:1)
             modelBuilder.Entity<Product>()
                 .HasOne(p => p.Category)
                 .WithMany(c => c.Products)
@@ -77,15 +76,75 @@ namespace WebShop.API.Data
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Composite primary key for OrderItem
-            modelBuilder.Entity<OrderItem>()
-                .HasKey(oi => new { oi.OrderId, oi.ProductId });
-
-            // Composite primary key for CartItem
+            // Composite key for CartItem: (CartItemId + CartId)
             modelBuilder.Entity<CartItem>()
-                .HasKey(ci => new { ci.CartId, ci.ProductId });
+                .HasKey(ci => new { ci.CartItemId, ci.CartId });
+
+            // Composite key for OrderItem: (OrderItemId + OrderId)
+            modelBuilder.Entity<OrderItem>()
+                .HasKey(oi => new { oi.OrderItemId, oi.OrderId });
 
 
+            modelBuilder.Entity<Product>()
+    .Property(p => p.Price)
+    .HasPrecision(18, 2);
+
+            modelBuilder.Entity<OrderItem>()
+                .Property(oi => oi.Price)
+                .HasPrecision(18, 2);
+
+
+            // Fixirani ID-jevi radi veze
+            var categoryFoodId = Guid.Parse("400cdda7-eb01-4207-be91-f2bb2c4a75c3");
+            var categoryGearId = Guid.Parse("c01542a0-7c26-495c-a15b-6365442aa50b");
+            var product1Id = Guid.Parse("2f7dd3d3-9097-49de-b750-119d10fe483a");
+            var product2Id = Guid.Parse("55acbafe-f9fc-469c-bcac-66955609b9ea");
+
+            // Seed kategorije
+            List<Category> categories = new List<Category>()
+            {
+                 new Category
+            {
+                CategoryId = categoryFoodId,
+                CategoryName = "Hrana",
+
+            },
+            new Category
+            {
+                CategoryId = categoryGearId,
+                CategoryName = "Oprema"
+            }
+            };
+
+            modelBuilder.Entity<Category>().HasData(categories);
+
+            // Seed proizvodi
+            List<Product> products = new List<Product>()
+            {
+                new Product
+                {
+                    ProductId = product1Id,
+                    Name = "Granule za pse",
+                    Description = "Premium hrana za odrasle pse.",
+                    Price = 29.99m,
+                    Stock = 50,
+                    ImageUrl = "https://www.pet-centar.rs/cdn/shop/files/Obrok_u_kesici_2.png?v=1700562347&width=360",
+                    CategoryId = categoryFoodId
+                },
+                new Product
+                {
+                    ProductId = product2Id,
+                    Name = "Povodac",
+                    Description = "Izdržljivi povodac za šetnju.",
+                    Price = 15.50m,
+                    Stock = 100,
+                    ImageUrl = "https://www.petbox.rs/sites/default/files/styles/product_teaser/public/product/images/crve.jpg?itok=rutNMX-W",
+                    CategoryId = categoryGearId
+                }
+            };
+            modelBuilder.Entity<Product>().HasData(products);
+
+            
         }
     }
 }

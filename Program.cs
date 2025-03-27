@@ -6,6 +6,7 @@ using Microsoft.OpenApi.Models;
 using System.Text;
 using WebShop.API.Data;
 using WebShop.API.Middlewares;
+using WebShop.API.Models.Domain;
 using WebShop.API.Repositories.Implementations;
 using WebShop.API.Repositories.Interfaces;
 using WebShop.API.Services.Implementations;
@@ -49,6 +50,8 @@ builder.Services.AddSwaggerGen(options =>
 
 });
 
+builder.Services.AddAutoMapper(typeof(Program));
+
 
 //dodajemo konekcione stringove iz konfiguracije
 builder.Services.AddDbContext<WebShopDbContext>(options=>options.UseSqlServer(builder.Configuration.GetConnectionString("WebShopConnectionString")));
@@ -56,11 +59,20 @@ builder.Services.AddDbContext<WebShopAuthDbContext>(options=>options.UseSqlServe
 
 builder.Services.AddScoped<ITokenRepository, TokenRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<ICartRepository, CartRepository>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 
-builder.Services.AddIdentityCore<IdentityUser>() //konfiguracija identity servisa
+
+builder.Services.AddIdentityCore<ApplicationUser>() //konfiguracija identity servisa
    .AddRoles<IdentityRole>() //dodavanje podrske za role
-   .AddTokenProvider<DataProtectorTokenProvider<IdentityUser>>("WebShop") //dodavanje token provajdera
+   .AddTokenProvider<DataProtectorTokenProvider<ApplicationUser>>("WebShop") //dodavanje token provajdera
    .AddEntityFrameworkStores<WebShopAuthDbContext>() //podesavanje entity framework skladista
    .AddDefaultTokenProviders(); //dodavanje podrazumevanih token provajdera
 

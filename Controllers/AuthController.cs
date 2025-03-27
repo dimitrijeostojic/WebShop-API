@@ -12,8 +12,6 @@ namespace WebShop.API.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly UserManager<IdentityUser> userManager;
-        private readonly ITokenRepository tokenRepository;
         private readonly IAuthService authService;
 
         // konstruktor koji prima userManager za upravljanje korisnicima

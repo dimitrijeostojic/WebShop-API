@@ -32,7 +32,8 @@ namespace WebShop.API.Middlewares
                 var error = new
                 {
                     Id = errorId,
-                    ErrorMessage = "Something went wrong! We are looking into resolving this."
+                    ErrorMessage = "Something went wrong! We are looking into resolving this.",
+                    Details = ex.InnerException?.Message
                 };
 
                 await httpContext.Response.WriteAsJsonAsync(error);

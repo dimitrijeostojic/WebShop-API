@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using WebShop.API.Models.Domain;
 
 namespace WebShop.API.Data
 {
-    public class WebShopAuthDbContext : IdentityDbContext
+    public class WebShopAuthDbContext : IdentityDbContext<ApplicationUser>
     {
         public WebShopAuthDbContext(DbContextOptions<WebShopAuthDbContext> dbContextOptions) : base(dbContextOptions)
         {

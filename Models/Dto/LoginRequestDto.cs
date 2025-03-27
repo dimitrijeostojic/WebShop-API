@@ -4,14 +4,16 @@ namespace WebShop.API.Models.Dto
 {
     public class LoginRequestDto
     {
-        [Required]
+        [Required(ErrorMessage = "Username is required.")]
         [DataType(DataType.Text)]
-        [MaxLength(10, ErrorMessage = "Username has to be maximum of 10 characters")]
+        [MaxLength(50, ErrorMessage = "Username can be up to 50 characters.")]
         public string Username { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Password is required.")]
         [DataType(DataType.Password)]
-        [MinLength(6, ErrorMessage = "Password has to be minimum of 6 characters")]
-        [MaxLength(10, ErrorMessage = "Password has to be maximum of 10 characters")]
+        [MinLength(6, ErrorMessage = "Password must be at least 6 characters.")]
+        [MaxLength(100, ErrorMessage = "Password can be up to 100 characters.")]
         public string Password { get; set; }
     }
+
 }

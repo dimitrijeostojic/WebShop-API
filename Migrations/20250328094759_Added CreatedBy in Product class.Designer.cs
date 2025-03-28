@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebShop.API.Data;
 
@@ -11,9 +12,11 @@ using WebShop.API.Data;
 namespace WebShop.API.Migrations
 {
     [DbContext(typeof(WebShopDbContext))]
-    partial class WebShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250328094759_Added CreatedBy in Product class")]
+    partial class AddedCreatedByinProductclass
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -148,6 +151,7 @@ namespace WebShop.API.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CreatedBy")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
@@ -180,6 +184,7 @@ namespace WebShop.API.Migrations
                         {
                             ProductId = new Guid("2f7dd3d3-9097-49de-b750-119d10fe483a"),
                             CategoryId = new Guid("400cdda7-eb01-4207-be91-f2bb2c4a75c3"),
+                            CreatedBy = "b8815d32-d907-4565-8799-49a5cebcdc4c",
                             Description = "Premium hrana za odrasle pse.",
                             ImageUrl = "https://www.pet-centar.rs/cdn/shop/files/Obrok_u_kesici_2.png?v=1700562347&width=360",
                             Name = "Granule za pse",
@@ -190,6 +195,7 @@ namespace WebShop.API.Migrations
                         {
                             ProductId = new Guid("55acbafe-f9fc-469c-bcac-66955609b9ea"),
                             CategoryId = new Guid("c01542a0-7c26-495c-a15b-6365442aa50b"),
+                            CreatedBy = "b8815d32-d907-4565-8799-49a5cebcdc4c",
                             Description = "Izdržljivi povodac za šetnju.",
                             ImageUrl = "https://www.petbox.rs/sites/default/files/styles/product_teaser/public/product/images/crve.jpg?itok=rutNMX-W",
                             Name = "Povodac",

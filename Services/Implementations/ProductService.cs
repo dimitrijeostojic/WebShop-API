@@ -26,9 +26,9 @@ namespace WebShop.API.Services.Implementations
             return productDomain;
         }
 
-        public async Task<List<Product>> GetAllProductsAsync()
+        public async Task<List<Product>> GetAllProductsAsync(string? filterOn, string? filterQuery, string? sortBy, bool? isAscending, int pageNumber, int pageSize)
         {
-            return await productRepository.GetAllProductsAsync();
+            return await productRepository.GetAllProductsAsync(filterOn, filterQuery, sortBy, isAscending ?? true, pageNumber, pageSize);
         }
 
         public async Task<Product?> GetProductByIdAsync(Guid productId)

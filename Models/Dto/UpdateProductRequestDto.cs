@@ -5,6 +5,7 @@ namespace WebShop.API.Models.Dto
     public class UpdateProductRequestDto
     {
         [Required(ErrorMessage = "Name is required")]
+        [StringLength(50, ErrorMessage = "Name must be less than 50 characters.")]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Price is required")]
@@ -12,6 +13,7 @@ namespace WebShop.API.Models.Dto
         public decimal Price { get; set; }
       
         [Required(ErrorMessage = "Description is required")]
+        [StringLength(1000, ErrorMessage = "Description must be less than 1000 characters.")]
         public string Description { get; set; }
         
         [Required(ErrorMessage = "Stock is required")]

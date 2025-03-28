@@ -9,6 +9,6 @@ namespace WebShop.API.Models.Domain
         public string CategoryName { get; set; }
 
         //Navigation properties
-        public ICollection<Product> Products { get; set; }
+        public ICollection<Product> Products { get; set; } = new List<Product>();
     }
 }

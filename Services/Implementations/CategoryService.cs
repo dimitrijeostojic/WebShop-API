@@ -21,13 +21,19 @@ namespace WebShop.API.Services.Implementations
             var existing = await categoryRepository.CategoryExistsByNameAsync(category.CategoryName);
 
             if (existing)
-                throw new Exception("Kategorija već postoji.");
+                throw new InvalidOperationException("Kategorija već postoji.");
             var categoryDomain = await categoryRepository.CreateCategoryAsync(category);
             return categoryDomain;
         }
 
         public async Task<Category?> DeleteCategoryAsync(Guid categoryId)
         {
+            var category = await categoryRepository.GetCategoryByIdAsync(categoryId);
+            if (category == null) return null;
+            if (category.Products != null && category.Products.Count > 0)
+            {
+                throw new InvalidOperationException("Ne mozete obrisati kategoriju koja ima proizvode");
+            }
             var categoryDomain = await categoryRepository.DeleteCategoryAsync(categoryId);
             if (categoryDomain == null) return null;
             return categoryDomain;

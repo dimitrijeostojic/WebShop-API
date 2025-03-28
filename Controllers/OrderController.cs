@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -22,6 +23,7 @@ namespace WebShop.API.Controllers
             this.mapper = mapper;
         }
 
+        [Authorize(Roles = "RegularUser")]
         [HttpPost]
         public async Task<IActionResult> PlaceOrder()
         {
@@ -41,6 +43,7 @@ namespace WebShop.API.Controllers
             });
         }
 
+        [Authorize(Roles = "RegularUser")]
         [HttpGet("GetMyOrders")]
         public async Task<IActionResult> GetMyOrders()
         {
@@ -59,6 +62,7 @@ namespace WebShop.API.Controllers
             return Ok(ordersDto);
         }
 
+        [Authorize(Roles = "RegularUser")]
         [HttpGet]
         [Route("{id:Guid}")]
         public async Task<IActionResult> GetOrderById([FromRoute] Guid id)
@@ -66,12 +70,40 @@ namespace WebShop.API.Controllers
             var orderDomain = await orderService.GetOrderByIdAsync(id);
             if (orderDomain == null)
             {
-                return NotFound();
+                return NotFound("Porudzbina nije pronadjena");
             }
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+            if (orderDomain.UserId != userId)
+                return Forbid();
             var orderDto = mapper.Map<OrderDto>(orderDomain);
             return Ok(orderDto);
 
         }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet("all")]
+        public async Task<IActionResult> GetAllOrders()
+        {
+            var orders = await orderService.GetAllOrdersAsync();
+            var ordersDto = mapper.Map<List<OrderDto>>(orders);
+            return Ok(ordersDto);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPut]
+        [Route("{orderId:Guid}/status")]
+        public async Task<IActionResult> UpdateOrderStatus([FromRoute]Guid orderId, [FromBody] UpdateOrderStatusDto orderStatusDto)
+        {
+            var updatedOrder = await orderService.UpdateOrderStatusAsync(orderId, orderStatusDto.NewStatus);
+            if (updatedOrder == null)
+            {
+                return NotFound("Porudzbina nije pronadjena");
+            }
+            var updatedOrderDto = mapper.Map<OrderDto>(updatedOrder);
+            return Ok(updatedOrderDto);
+        }
+
+
     }
 
 }

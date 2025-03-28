@@ -13,31 +13,28 @@ namespace WebShop.API.Middlewares
             this.next = next;
         }
 
-        public async Task InvokeAsync(HttpContext httpContext)
+        public async Task InvokeAsync(HttpContext context)
         {
             try
             {
-                await next(httpContext);
+                await next(context);
             }
             catch (Exception ex)
             {
-                var errorId = Guid.NewGuid();
-                //Log this error
-                logger.LogError(ex, $"{errorId} : {ex.Message}");
+                context.Response.ContentType = "application/json";
 
-                //Return a custom error response
-                httpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                httpContext.Response.ContentType = "application/json";
-
-                var error = new
+                if (ex is InvalidOperationException || ex is Exception)
                 {
-                    Id = errorId,
-                    ErrorMessage = "Something went wrong! We are looking into resolving this.",
-                    Details = ex.InnerException?.Message
-                };
-
-                await httpContext.Response.WriteAsJsonAsync(error);
+                    context.Response.StatusCode = StatusCodes.Status400BadRequest;
+                    await context.Response.WriteAsJsonAsync(new { error = ex.Message });
+                }
+                else
+                {
+                    context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+                    await context.Response.WriteAsJsonAsync(new { error = "Something went wrong! We are looking into resolving this." });
+                }
             }
         }
+
     }
 }

@@ -12,10 +12,11 @@ namespace WebShop.API.Models.Domain
         public int Stock { get; set; }
         public string ImageUrl { get; set; }
         public Guid CategoryId{ get; set; }
+        public string? CreatedBy { get; set; }
 
         //Navigation properties
         public Category Category { get; set; }
-        public ICollection<OrderItem> OrderItems { get; set; }
-        public ICollection<CartItem> CartItems { get; set; }
+        public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
+        public ICollection<CartItem> CartItems { get; set; } = new List<CartItem>();
     }
 }

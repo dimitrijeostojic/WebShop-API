@@ -20,22 +20,6 @@ namespace WebShop.API.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            //// User -> Cart (1:1)
-            //modelBuilder.Entity<ApplicationUser>()
-            //    .HasOne(u => u.Cart)
-            //    .WithOne(c => c.User)
-            //    .HasForeignKey<Cart>(c => c.UserId)  // <-- jasno definišemo FK
-            //    .IsRequired()
-            //    .OnDelete(DeleteBehavior.Cascade);
-
-            //// User -> Order (1:N)
-            //modelBuilder.Entity<ApplicationUser>()
-            //    .HasMany(u => u.Orders)
-            //    .WithOne(o => o.User)
-            //    .HasForeignKey(o => o.UserId)
-            //    .IsRequired()
-            //    .OnDelete(DeleteBehavior.Cascade);
-
             // Cart -> CartItem (1:N)
             modelBuilder.Entity<Cart>()
                 .HasMany(c => c.CartItems)
@@ -85,66 +69,64 @@ namespace WebShop.API.Data
                 .HasKey(oi => new { oi.OrderItemId, oi.OrderId });
 
 
-            modelBuilder.Entity<Product>()
-    .Property(p => p.Price)
-    .HasPrecision(18, 2);
+            modelBuilder.Entity<Product>().Property(p => p.Price).HasPrecision(18, 2);
 
-            modelBuilder.Entity<OrderItem>()
-                .Property(oi => oi.Price)
-                .HasPrecision(18, 2);
+            modelBuilder.Entity<OrderItem>().Property(oi => oi.Price).HasPrecision(18, 2);
 
 
-            // Fixirani ID-jevi radi veze
-            var categoryFoodId = Guid.Parse("400cdda7-eb01-4207-be91-f2bb2c4a75c3");
-            var categoryGearId = Guid.Parse("c01542a0-7c26-495c-a15b-6365442aa50b");
-            var product1Id = Guid.Parse("2f7dd3d3-9097-49de-b750-119d10fe483a");
-            var product2Id = Guid.Parse("55acbafe-f9fc-469c-bcac-66955609b9ea");
+            #region Seedovanje kategorija i proizvoda
+            //// Fixirani ID-jevi radi veze
+            //var categoryFoodId = Guid.Parse("400cdda7-eb01-4207-be91-f2bb2c4a75c3");
+            //var categoryGearId = Guid.Parse("c01542a0-7c26-495c-a15b-6365442aa50b");
+            //var product1Id = Guid.Parse("2f7dd3d3-9097-49de-b750-119d10fe483a");
+            //var product2Id = Guid.Parse("55acbafe-f9fc-469c-bcac-66955609b9ea");
 
-            // Seed kategorije
-            List<Category> categories = new List<Category>()
-            {
-                 new Category
-            {
-                CategoryId = categoryFoodId,
-                CategoryName = "Hrana",
+            //// Seed kategorije
+            //List<Category> categories = new List<Category>()
+            //{
+            //     new Category
+            //{
+            //    CategoryId = categoryFoodId,
+            //    CategoryName = "Hrana",
 
-            },
-            new Category
-            {
-                CategoryId = categoryGearId,
-                CategoryName = "Oprema"
-            }
-            };
+            //},
+            //new Category
+            //{
+            //    CategoryId = categoryGearId,
+            //    CategoryName = "Oprema"
+            //}
+            //};
 
-            modelBuilder.Entity<Category>().HasData(categories);
+            //modelBuilder.Entity<Category>().HasData(categories);
 
-            // Seed proizvodi
-            List<Product> products = new List<Product>()
-            {
-                new Product
-                {
-                    ProductId = product1Id,
-                    Name = "Granule za pse",
-                    Description = "Premium hrana za odrasle pse.",
-                    Price = 29.99m,
-                    Stock = 50,
-                    ImageUrl = "https://www.pet-centar.rs/cdn/shop/files/Obrok_u_kesici_2.png?v=1700562347&width=360",
-                    CategoryId = categoryFoodId
-                },
-                new Product
-                {
-                    ProductId = product2Id,
-                    Name = "Povodac",
-                    Description = "Izdržljivi povodac za šetnju.",
-                    Price = 15.50m,
-                    Stock = 100,
-                    ImageUrl = "https://www.petbox.rs/sites/default/files/styles/product_teaser/public/product/images/crve.jpg?itok=rutNMX-W",
-                    CategoryId = categoryGearId
-                }
-            };
-            modelBuilder.Entity<Product>().HasData(products);
+            //// Seed proizvodi
+            //List<Product> products = new List<Product>()
+            //{
+            //    new Product
+            //    {
+            //        ProductId = product1Id,
+            //        Name = "Granule za pse",
+            //        Description = "Premium hrana za odrasle pse.",
+            //        Price = 29.99m,
+            //        Stock = 50,
+            //        ImageUrl = "https://www.pet-centar.rs/cdn/shop/files/Obrok_u_kesici_2.png?v=1700562347&width=360",
+            //        CategoryId = categoryFoodId
+            //    },
+            //    new Product
+            //    {
+            //        ProductId = product2Id,
+            //        Name = "Povodac",
+            //        Description = "Izdržljivi povodac za šetnju.",
+            //        Price = 15.50m,
+            //        Stock = 100,
+            //        ImageUrl = "https://www.petbox.rs/sites/default/files/styles/product_teaser/public/product/images/crve.jpg?itok=rutNMX-W",
+            //        CategoryId = categoryGearId
+            //    }
+            //};
+            //modelBuilder.Entity<Product>().HasData(products); 
+            #endregion
 
-            
+
         }
     }
 }

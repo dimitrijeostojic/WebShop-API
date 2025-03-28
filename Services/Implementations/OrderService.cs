@@ -24,6 +24,15 @@ namespace WebShop.API.Services.Implementations
                 throw new InvalidOperationException("Korpa je prazna ili ne postoji.");
             }
 
+            foreach (var item in cart.CartItems)
+            {
+                if (item.Product.Stock<item.Quantity)
+                {
+                    throw new InvalidOperationException($"Proizvod '{item.Product.Name}' nema dovoljno na lageru.");
+                }
+                item.Product.Stock -= item.Quantity;
+            }
+
             var order = new Order
             {
                 OrderId = Guid.NewGuid(),
@@ -48,16 +57,25 @@ namespace WebShop.API.Services.Implementations
             return createdOrder;
         }
 
+        public async Task<List<Order>> GetAllOrdersAsync()
+        {
+            return await orderRepository.GetAllOrdersAsync();
+        }
+
         public async Task<List<Order>> GetMyOrdersAsync(string userId)
         {
-            var orders = await orderRepository.GetMyOrdersAsync(userId);
-            return orders;
+            return await orderRepository.GetMyOrdersAsync(userId);
         }
 
         public async Task<Order?> GetOrderByIdAsync(Guid orderId)
         {
-            var order = await orderRepository.GetOrderByIdAsync(orderId);
-            return order;
+            return await orderRepository.GetOrderByIdAsync(orderId);
+            
+        }
+
+        public async Task<Order?> UpdateOrderStatusAsync(Guid orderId, OrderStatus status)
+        {
+            return await orderRepository.UpdateOrderStatusAsync(orderId, status);
         }
     }
 }

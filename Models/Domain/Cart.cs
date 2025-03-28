@@ -11,6 +11,6 @@ namespace WebShop.API.Models.Domain
         public string UserId { get; set; }
 
         //Navigation properties
-        public ICollection<CartItem> CartItems{ get; set; }
+        public ICollection<CartItem> CartItems { get; set; } = new List<CartItem>();
     }
 }

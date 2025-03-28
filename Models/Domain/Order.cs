@@ -13,6 +13,6 @@ namespace WebShop.API.Models.Domain
 
 
         //navigation properties
-        public ICollection<OrderItem> OrderItems { get; set; }
+        public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
     }
 }

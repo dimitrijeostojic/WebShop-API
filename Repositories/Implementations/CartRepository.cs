@@ -39,7 +39,7 @@ namespace WebShop.API.Repositories.Implementations
             }
         }
 
-        public async Task<Cart> GetCartByUserIdAsync(string userId)
+        public async Task<Cart?> GetCartByUserIdAsync(string userId)
         {
             return await dbContext.Cart.Include(c => c.CartItems).ThenInclude(ci => ci.Product).FirstOrDefaultAsync(c => c.UserId == userId);
         }

@@ -24,7 +24,7 @@ namespace WebShop.API.Controllers
             this.mapper = mapper;
         }
 
-        [Authorize]
+        [Authorize(Roles = "RegularUser")]
         [HttpGet("me")]
         public async Task<IActionResult> GetMyCart()
         {
@@ -35,6 +35,7 @@ namespace WebShop.API.Controllers
         }
 
 
+        [Authorize(Roles = "RegularUser")]
         [HttpPost("items")]
         public async Task<IActionResult> AddItemToCart([FromBody] AddToCartRequestDto request)
         {
@@ -54,6 +55,7 @@ namespace WebShop.API.Controllers
             });
         }
 
+        [Authorize(Roles = "RegularUser")]
         [HttpDelete]
         [Route("items/{productId:Guid}")]
         public async Task<IActionResult> RemoveItemFromCart([FromRoute] Guid productId)
@@ -74,6 +76,7 @@ namespace WebShop.API.Controllers
             });
         }
 
+        [Authorize(Roles = "RegularUser")]
         [HttpDelete("clear")]
         public async Task<IActionResult> ClearCart()
         {
@@ -83,8 +86,9 @@ namespace WebShop.API.Controllers
             return Ok(new { message = "Korpa uspešno ispražnjena." });
         }
 
+        [Authorize(Roles = "RegularUser")]
         [HttpPut]
-        [Route("{id:Guid}")]
+        [Route("{productId:Guid}")]
         public async Task<IActionResult> UpdateCartItemQunatity(Guid productId, UpdateCartItemRequestDto updateCartItemRequest)
         {
             if (updateCartItemRequest.Quantity <= 0)

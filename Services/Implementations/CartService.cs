@@ -71,14 +71,14 @@ namespace WebShop.API.Services.Implementations
         public async Task<Product> RemoveProductFromCartAsync(string userId, Guid productId)
         {
             var cart = await cartRepository.GetCartByUserIdAsync(userId);
-            if (cart == null) return null;
+            if (cart == null) throw new Exception("Korpa ne postoji");
 
-            var item = cart.CartItems.FirstOrDefault(ci => ci.ProductId == productId);
-            if (item == null) return null;
+            var cartItem = cart.CartItems.FirstOrDefault(ci => ci.ProductId == productId);
+            if (cartItem == null) return null;
 
-            var product = item.Product;
+            var product = cartItem.Product;
 
-            item = await cartRepository.RemoveCartItemFromCartAsync(item);
+            cartItem = await cartRepository.RemoveCartItemFromCartAsync(cartItem);
 
             return product;
         }
@@ -86,7 +86,7 @@ namespace WebShop.API.Services.Implementations
         public async Task<CartItem?> UpdateCartItemQuantityAsync(string userId, Guid productId, int quanity)
         {
             var cart = await cartRepository.GetCartByUserIdAsync(userId);
-            if (cart == null) return null;
+            if (cart == null) throw new Exception("Korpa ne postoji");
 
             var cartItem = cart.CartItems.FirstOrDefault(c => c.ProductId == productId);
             if (cartItem == null) return null;

@@ -9,7 +9,7 @@
         public int Stock { get; set; }
         public string ImageUrl { get; set; }
         public Guid CategoryId { get; set; }
-
+        public string? CreatedBy { get; set; }
         public string? CategoryName { get; set; } // korisno za prikaz
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebShop.API.Data;
 using WebShop.API.Models.Domain;
 using WebShop.API.Repositories.Interfaces;
@@ -29,9 +30,38 @@ namespace WebShop.API.Repositories.Implementations
             return productDomain;
         }
 
-        public async Task<List<Product>> GetAllProductsAsync()
+        public async Task<List<Product>> GetAllProductsAsync(string? filterOn = null, string? filterQuery = null, string? sortBy = null, bool isAscending = true, int pageNumber = 1, int pageSize = 1000)
         {
-            return await dbContext.Product.Include(p => p.Category).ToListAsync();
+            var products =  dbContext.Product.Include(p => p.Category).AsQueryable();
+
+            //Filtering
+            if(!string.IsNullOrEmpty(filterOn) && !string.IsNullOrEmpty(filterQuery))
+            {
+                if (filterOn.Equals("Name", StringComparison.OrdinalIgnoreCase))
+                {
+                    products = products.Where(x => x.Name.Contains(filterQuery));
+                }
+            }
+
+            //Sorting
+            if (!string.IsNullOrEmpty(sortBy))
+            {
+                if (sortBy.Equals("Name", StringComparison.OrdinalIgnoreCase))
+                {
+                    products = isAscending ? products.OrderBy(x => x.Name) : products.OrderByDescending(x => x.Name);
+                }
+                if (sortBy.Equals("Price", StringComparison.OrdinalIgnoreCase))
+                {
+                    products = isAscending ? products.OrderBy(x => x.Price) : products.OrderByDescending(x => x.Price);
+                }
+            }
+
+            //pagination
+            var skipResult = (pageNumber - 1) * pageSize;
+
+            return await products.Skip(skipResult).Take(pageSize).ToListAsync();
+
+            //return await dbContext.Product.Include(p => p.Category).ToListAsync();
         }
 
         public async Task<Product?> GetProductByIdAsync(Guid productId)

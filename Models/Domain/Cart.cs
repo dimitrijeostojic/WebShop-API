@@ -7,7 +7,6 @@ namespace WebShop.API.Models.Domain
     {
         [Key]
         public Guid CartId { get; set; }
-        public CartStatus CartStatus { get; set; }
         public string UserId { get; set; }
 
         //Navigation properties

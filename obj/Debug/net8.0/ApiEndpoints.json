@@ -33,8 +33,24 @@
   },
   {
     "ContainingType": "WebShop.API.Controllers.CartController",
+    "Method": "AddItemToCart",
+    "RelativePath": "api/Cart/addItemToCart",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "WebShop.API.Models.Dto.AddToCartRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebShop.API.Controllers.CartController",
     "Method": "UpdateCartItemQunatity",
-    "RelativePath": "api/Cart/{productId}",
+    "RelativePath": "api/Cart/cartItemQuantity/{productId}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -55,27 +71,11 @@
   {
     "ContainingType": "WebShop.API.Controllers.CartController",
     "Method": "ClearCart",
-    "RelativePath": "api/Cart/clear",
+    "RelativePath": "api/Cart/clearCart",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "WebShop.API.Controllers.CartController",
-    "Method": "AddItemToCart",
-    "RelativePath": "api/Cart/items",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "request",
-        "Type": "WebShop.API.Models.Dto.AddToCartRequestDto",
-        "IsRequired": true
-      }
-    ],
     "ReturnTypes": []
   },
   {
@@ -97,7 +97,7 @@
   {
     "ContainingType": "WebShop.API.Controllers.CartController",
     "Method": "GetMyCart",
-    "RelativePath": "api/Cart/me",
+    "RelativePath": "api/Cart/myCart",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -185,16 +185,6 @@
   },
   {
     "ContainingType": "WebShop.API.Controllers.OrderController",
-    "Method": "PlaceOrder",
-    "RelativePath": "api/Order",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "WebShop.API.Controllers.OrderController",
     "Method": "GetOrderById",
     "RelativePath": "api/Order/{id}",
     "HttpMethod": "GET",
@@ -245,6 +235,16 @@
     "Method": "GetMyOrders",
     "RelativePath": "api/Order/GetMyOrders",
     "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebShop.API.Controllers.OrderController",
+    "Method": "PlaceOrder",
+    "RelativePath": "api/Order/PlaceOrder",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [],

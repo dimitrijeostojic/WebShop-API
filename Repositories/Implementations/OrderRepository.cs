@@ -35,12 +35,12 @@ namespace WebShop.API.Repositories.Implementations
 
         public async Task<Order?> GetOrderByIdAsync(Guid orderId)
         {
-           return await dbContext.Order.FirstOrDefaultAsync(x => x.OrderId == orderId);
+           return await dbContext.Order.Include(p=>p.OrderItems).FirstOrDefaultAsync(x => x.OrderId == orderId);
         }
 
         public async Task<Order?> UpdateOrderStatusAsync(Guid orderId, OrderStatus status)
         {
-            var orderDomain = await dbContext.Order.FirstOrDefaultAsync(o => o.OrderId == orderId);
+            var orderDomain = await dbContext.Order.Include(p => p.OrderItems).ThenInclude(oi => oi.Product).FirstOrDefaultAsync(o => o.OrderId == orderId);
             if (orderDomain==null)
             {
                 return null;

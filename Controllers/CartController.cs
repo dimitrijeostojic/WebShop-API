@@ -25,7 +25,7 @@ namespace WebShop.API.Controllers
         }
 
         [Authorize(Roles = "RegularUser")]
-        [HttpGet("me")]
+        [HttpGet("myCart")]
         public async Task<IActionResult> GetMyCart()
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
@@ -36,7 +36,7 @@ namespace WebShop.API.Controllers
 
 
         [Authorize(Roles = "RegularUser")]
-        [HttpPost("items")]
+        [HttpPost("addItemToCart")]
         public async Task<IActionResult> AddItemToCart([FromBody] AddToCartRequestDto request)
         {
             if (request.Quantity <= 0)
@@ -77,7 +77,7 @@ namespace WebShop.API.Controllers
         }
 
         [Authorize(Roles = "RegularUser")]
-        [HttpDelete("clear")]
+        [HttpDelete("clearCart")]
         public async Task<IActionResult> ClearCart()
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
@@ -88,7 +88,7 @@ namespace WebShop.API.Controllers
 
         [Authorize(Roles = "RegularUser")]
         [HttpPut]
-        [Route("{productId:Guid}")]
+        [Route("cartItemQuantity/{productId:Guid}")]
         public async Task<IActionResult> UpdateCartItemQunatity(Guid productId, UpdateCartItemRequestDto updateCartItemRequest)
         {
             if (updateCartItemRequest.Quantity <= 0)
@@ -96,14 +96,14 @@ namespace WebShop.API.Controllers
                 return BadRequest("Količina mora biti veća od 0.");
             }
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
-            var updatedItem = await cartService.UpdateCartItemQuantityAsync(userId, productId, updateCartItemRequest.Quantity);
+            var updatedCartItem = await cartService.UpdateCartItemQuantityAsync(userId, productId, updateCartItemRequest.Quantity);
 
-            if (updatedItem == null)
+            if (updatedCartItem == null)
             {
                 return NotFound("Proizvod nije pronađen u korpi.");
             }
-
-            return Ok(updatedItem);
+            var updatedCartItemDto = mapper.Map<CartItemDto>(updatedCartItem);
+            return Ok(updatedCartItemDto);
 
         }
 

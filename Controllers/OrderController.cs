@@ -24,7 +24,7 @@ namespace WebShop.API.Controllers
         }
 
         [Authorize(Roles = "RegularUser")]
-        [HttpPost]
+        [HttpPost("PlaceOrder")]
         public async Task<IActionResult> PlaceOrder()
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;

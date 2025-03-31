@@ -22,7 +22,7 @@ namespace WebShop.API.Controllers
             this.mapper = mapper;
         }
 
-        [Authorize(Roles = "Admin, RegularUser")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryRequestDto createCategoryRequestDto)
         {

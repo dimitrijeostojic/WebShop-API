@@ -1,1 +1,45 @@
+## Build results
+bin/
+obj/
+
+## User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## VS Code
+.vscode/
+
+## Visual Studio
 .vs/
+*.dbmdl
+*.pdb
+*.opendb
+
+## NuGet
+*.nupkg
+.nuget/
+packages/
+project.lock.json
+project.assets.json
+
+## Logs
+*.log
+
+## OS generated
+.DS_Store
+Thumbs.db
+
+## Entity Framework Migrations snapshot files (optional)
+*Migrations/*.Designer.cs
+*Migrations/*.resx
+
+## Rider (ako koristiš JetBrains IDE)
+.idea/
+*.sln.iml
+
+## Secret files (ako ih imaš)
+appsettings.Development.json
+appsettings.Local.json
+secrets.json

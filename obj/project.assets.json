@@ -8098,19 +8098,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\dostojic\\.nuget\\packages\\": {}
+    "C:\\Users\\dimit\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\dostojic\\Desktop\\Dimitrije\\WebShop.API\\WebShop.API.csproj",
+      "projectUniqueName": "C:\\Users\\dimit\\Desktop\\WebShop\\WebShop-API\\WebShop.API.csproj",
       "projectName": "WebShop.API",
-      "projectPath": "C:\\Users\\dostojic\\Desktop\\Dimitrije\\WebShop.API\\WebShop.API.csproj",
-      "packagesPath": "C:\\Users\\dostojic\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\dostojic\\Desktop\\Dimitrije\\WebShop.API\\obj\\",
+      "projectPath": "C:\\Users\\dimit\\Desktop\\WebShop\\WebShop-API\\WebShop.API.csproj",
+      "packagesPath": "C:\\Users\\dimit\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\dimit\\Desktop\\WebShop\\WebShop-API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\dostojic\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\dimit\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8118,10 +8118,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
-        "\\\\RS-FILESRV01\\DM Products\\Tools\\nuget": {},
-        "https://api.nuget.org/v3/index.json": {},
-        "https://pkgs.dev.azure.com/loboag/_packaging/lobo-dms4/nuget/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
@@ -8214,7 +8211,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

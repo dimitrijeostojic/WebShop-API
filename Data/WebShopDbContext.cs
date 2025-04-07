@@ -29,12 +29,12 @@ namespace WebShop.API.Data
                 .OnDelete(DeleteBehavior.Cascade);
 
             // CartItem -> Product (N:1)
-            modelBuilder.Entity<CartItem>()
-                .HasOne(ci => ci.Product)
-                .WithMany(p => p.CartItems)
-                .HasForeignKey(ci => ci.ProductId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
+            //modelBuilder.Entity<CartItem>()
+            //    .HasOne(ci => ci.Product)
+            //    .WithMany(p => p.CartItems)
+            //    .HasForeignKey(ci => ci.ProductId)
+            //    .IsRequired()
+            //    .OnDelete(DeleteBehavior.Restrict);
 
             // Order -> OrderItem (1:N)
             modelBuilder.Entity<Order>()
@@ -45,12 +45,12 @@ namespace WebShop.API.Data
                 .OnDelete(DeleteBehavior.Cascade);
 
             // OrderItem -> Product (N:1)
-            modelBuilder.Entity<OrderItem>()
-                .HasOne(oi => oi.Product)
-                .WithMany(p => p.OrderItems)
-                .HasForeignKey(oi => oi.ProductId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
+            //modelBuilder.Entity<OrderItem>()
+            //    .HasOne(oi => oi.Product)
+            //    .WithMany(p => p.OrderItems)
+            //    .HasForeignKey(oi => oi.ProductId)
+            //    .IsRequired()
+            //    .OnDelete(DeleteBehavior.Restrict);
 
             // Product -> Category (N:1)
             modelBuilder.Entity<Product>()

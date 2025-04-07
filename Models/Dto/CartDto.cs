@@ -8,6 +8,6 @@ namespace WebShop.API.Models.Dto
         public Guid UserId { get; set; }
         public decimal Total => CartItems?.Sum(x => x.Product.Price * x.Quantity) ?? 0;
 
-        public List<CartItemDto> CartItems { get; set; }
+        public List<CartItemDto> CartItems { get; set; } = new();
     }
 }

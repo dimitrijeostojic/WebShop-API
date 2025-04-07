@@ -58,8 +58,7 @@ namespace WebShop.API.Services.Implementations
                 cart = new Cart()
                 {
                     CartId = Guid.NewGuid(),
-                    UserId = userId,
-                    CartItems = new List<CartItem>()
+                    UserId = userId
                 };
                 cart = await cartRepository.CreateCartAsync(cart);
             }

@@ -36,7 +36,7 @@ namespace WebShop.API.Controllers
             return CreatedAtAction(nameof(GetCategoryById), new { categoryId = categoryDto.CategoryId }, categoryDto);
         }
 
-        [Authorize(Roles = "Admin, Manager")]
+        [Authorize(Roles = "Admin, Manager, RegularUser")]
         [HttpGet]
         public async Task<IActionResult> GetAllCategories()
         {

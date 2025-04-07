@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "BtkMhxVOCGw=",
+  "dgSpecHash": "2l5BMYA9dNw=",
   "success": true,
-  "projectFilePath": "C:\\Users\\dostojic\\Desktop\\Dimitrije\\WebShop.API\\WebShop.API.csproj",
+  "projectFilePath": "C:\\Users\\dostojic\\Desktop\\Dimitrije\\WebShop.API\\WebShop.API\\WebShop.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dostojic\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\dostojic\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",

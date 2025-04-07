@@ -34,12 +34,22 @@ namespace WebShop.API.Repositories.Implementations
         {
             var products =  dbContext.Product.Include(p => p.Category).AsQueryable();
 
+            var skipResult = (pageNumber - 1) * pageSize;
+
             //Filtering
-            if(!string.IsNullOrEmpty(filterOn) && !string.IsNullOrEmpty(filterQuery))
+            if (!string.IsNullOrEmpty(filterOn) && !string.IsNullOrEmpty(filterQuery))
             {
                 if (filterOn.Equals("Name", StringComparison.OrdinalIgnoreCase))
                 {
                     products = products.Where(x => x.Name.Contains(filterQuery));
+                }
+                if (filterOn.Equals("Category", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (filterQuery.Contains("sve"))
+                    {
+                        return await products.Skip(skipResult).Take(pageSize).ToListAsync();
+                    }
+                    products = products.Where(x => x.Category.CategoryName.Contains(filterQuery));
                 }
             }
 
@@ -57,7 +67,6 @@ namespace WebShop.API.Repositories.Implementations
             }
 
             //pagination
-            var skipResult = (pageNumber - 1) * pageSize;
 
             return await products.Skip(skipResult).Take(pageSize).ToListAsync();
 

@@ -8103,11 +8103,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\dostojic\\Desktop\\Dimitrije\\WebShop.API\\WebShop.API.csproj",
+      "projectUniqueName": "C:\\Users\\dostojic\\Desktop\\Dimitrije\\WebShop.API\\WebShop.API\\WebShop.API.csproj",
       "projectName": "WebShop.API",
-      "projectPath": "C:\\Users\\dostojic\\Desktop\\Dimitrije\\WebShop.API\\WebShop.API.csproj",
+      "projectPath": "C:\\Users\\dostojic\\Desktop\\Dimitrije\\WebShop.API\\WebShop.API\\WebShop.API.csproj",
       "packagesPath": "C:\\Users\\dostojic\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\dostojic\\Desktop\\Dimitrije\\WebShop.API\\obj\\",
+      "outputPath": "C:\\Users\\dostojic\\Desktop\\Dimitrije\\WebShop.API\\WebShop.API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\dostojic\\AppData\\Roaming\\NuGet\\NuGet.Config",

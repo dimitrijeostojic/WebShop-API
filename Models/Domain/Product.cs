@@ -16,5 +16,7 @@ namespace WebShop.API.Models.Domain
 
         //Navigation properties
         public Category Category { get; set; }
+        public ICollection<OrderItem> OrderItems { get; set; }
+        public ICollection<CartItem> CartItems { get; set; }
     }
 }

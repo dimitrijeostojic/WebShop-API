@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
+using System.Security.Claims;
 using WebShop.API.Models.Domain;
 using WebShop.API.Models.Dto;
 using WebShop.API.Repositories.Interfaces;

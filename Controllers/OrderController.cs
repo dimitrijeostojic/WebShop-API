@@ -81,7 +81,7 @@ namespace WebShop.API.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpGet("all")]
+        [HttpGet]
         public async Task<IActionResult> GetAllOrders()
         {
             var orders = await orderService.GetAllOrdersAsync();

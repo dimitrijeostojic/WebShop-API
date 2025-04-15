@@ -26,5 +26,8 @@ namespace WebShop.API.Models.Dto
 
         [Required(ErrorMessage = "CategoryId is required.")]
         public Guid CategoryId { get; set; }
+
+        [Required(ErrorMessage = "CreatedBy is required.")]
+        public Guid CreatedBy { get; set; }
     }
 }

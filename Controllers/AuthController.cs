@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
+using WebShop.API.CustomActionFilter;
 using WebShop.API.Models.Dto;
 using WebShop.API.Repositories.Interfaces;
 using WebShop.API.Services.Interfaces;
@@ -23,12 +24,9 @@ namespace WebShop.API.Controllers
         //Metoda za registraciju korisnika
         [HttpPost]
         [Route("Register")]
+        [ValidateModel]
         public async Task<IActionResult> Register([FromBody] RegisterRequestDto registerRequestDto)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        {   
             var response = await authService.Register(registerRequestDto);
             if (response!=null)
             {
@@ -40,12 +38,9 @@ namespace WebShop.API.Controllers
         //metoda za logovanje
         [HttpPost]
         [Route("Login")]
+        [ValidateModel]
         public async Task<IActionResult> Login([FromBody] LoginRequestDto loginRequestDto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             var response = await authService.Login(loginRequestDto);
             if (response != null)
             {

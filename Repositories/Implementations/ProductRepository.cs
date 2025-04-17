@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using WebShop.API.Data;
 using WebShop.API.Models.Domain;
@@ -71,6 +72,11 @@ namespace WebShop.API.Repositories.Implementations
             return await products.Skip(skipResult).Take(pageSize).ToListAsync();
 
             //return await dbContext.Product.Include(p => p.Category).ToListAsync();
+        }
+
+        public async Task<List<Product?>> GetMyProductsAsync(string userId)
+        {
+            return await dbContext.Product.Include(p => p.Category).Where(x => x.CreatedBy == userId.ToString()).ToListAsync();
         }
 
         public async Task<Product?> GetProductByIdAsync(Guid productId)

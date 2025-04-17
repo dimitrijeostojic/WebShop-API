@@ -10,6 +10,7 @@ namespace WebShop.API.Repositories.Interfaces
         Task<Product?> GetProductByIdAsync(Guid productId);
         Task<Product?> DeleteProductAsync(Guid productId);
         Task<Product?> UpdateProductAsync(Guid productId, Product product);
+        Task<List<Product?>> GetMyProductsAsync(string userId);
 
     }
 }

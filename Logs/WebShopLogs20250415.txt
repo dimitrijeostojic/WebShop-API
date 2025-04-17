@@ -1,0 +1,56 @@
+2025-04-15 14:26:17.551 +02:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-04-15 14:26:17.620 +02:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-04-15 15:33:18.276 +02:00 [ERR] An unhandled exception has occurred while executing the request.
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Conflicting method/path combination "GET api/Product" for actions - WebShop.API.Controllers.ProductController.GetAllProducts (WebShop.API),WebShop.API.Controllers.ProductController.GetMyProducts (WebShop.API). Actions require a unique method/path combination for Swagger/OpenAPI 3.0. Use ConflictingActionsResolver as a workaround
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerDocumentWithoutFilters(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerAsync(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-04-15 15:33:42.703 +02:00 [ERR] An unhandled exception has occurred while executing the request.
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Conflicting method/path combination "GET api/Product" for actions - WebShop.API.Controllers.ProductController.GetAllProducts (WebShop.API),WebShop.API.Controllers.ProductController.GetMyProducts (WebShop.API). Actions require a unique method/path combination for Swagger/OpenAPI 3.0. Use ConflictingActionsResolver as a workaround
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerDocumentWithoutFilters(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerAsync(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-04-15 15:34:42.038 +02:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-04-15 15:34:42.042 +02:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-04-15 15:54:51.422 +02:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-04-15 15:54:51.485 +02:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-04-15 15:55:01.259 +02:00 [ERR] Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Product -> List`1
+WebShop.API.Models.Domain.Product -> System.Collections.Generic.List`1[[WebShop.API.Models.Dto.ProductDto, WebShop.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2025-04-15 15:55:03.007 +02:00 [ERR] Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Product -> List`1
+WebShop.API.Models.Domain.Product -> System.Collections.Generic.List`1[[WebShop.API.Models.Dto.ProductDto, WebShop.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2025-04-15 15:56:07.107 +02:00 [ERR] Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Product -> List`1
+WebShop.API.Models.Domain.Product -> System.Collections.Generic.List`1[[WebShop.API.Models.Dto.ProductDto, WebShop.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2025-04-15 15:56:07.544 +02:00 [ERR] Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Product -> List`1
+WebShop.API.Models.Domain.Product -> System.Collections.Generic.List`1[[WebShop.API.Models.Dto.ProductDto, WebShop.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2025-04-15 15:57:18.494 +02:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-04-15 15:57:18.548 +02:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-04-15 15:58:05.650 +02:00 [ERR] Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Product -> List`1
+WebShop.API.Models.Domain.Product -> System.Collections.Generic.List`1[[WebShop.API.Models.Dto.ProductDto, WebShop.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2025-04-15 15:58:05.650 +02:00 [ERR] Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Product -> List`1
+WebShop.API.Models.Domain.Product -> System.Collections.Generic.List`1[[WebShop.API.Models.Dto.ProductDto, WebShop.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2025-04-15 16:41:23.533 +02:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-04-15 16:41:23.591 +02:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.

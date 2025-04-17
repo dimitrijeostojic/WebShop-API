@@ -22,14 +22,71 @@ namespace WebShop.API.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("WebShop.API.Models.Domain.ApplicationUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ApplicationUser");
+                });
+
             modelBuilder.Entity("WebShop.API.Models.Domain.Cart", b =>
                 {
                     b.Property<Guid>("CartId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("CartStatus")
-                        .HasColumnType("int");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -76,18 +133,6 @@ namespace WebShop.API.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("Category");
-
-                    b.HasData(
-                        new
-                        {
-                            CategoryId = new Guid("400cdda7-eb01-4207-be91-f2bb2c4a75c3"),
-                            CategoryName = "Hrana"
-                        },
-                        new
-                        {
-                            CategoryId = new Guid("c01542a0-7c26-495c-a15b-6365442aa50b"),
-                            CategoryName = "Oprema"
-                        });
                 });
 
             modelBuilder.Entity("WebShop.API.Models.Domain.Order", b =>
@@ -150,6 +195,9 @@ namespace WebShop.API.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CreatorId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -173,29 +221,9 @@ namespace WebShop.API.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Product");
+                    b.HasIndex("CreatorId");
 
-                    b.HasData(
-                        new
-                        {
-                            ProductId = new Guid("2f7dd3d3-9097-49de-b750-119d10fe483a"),
-                            CategoryId = new Guid("400cdda7-eb01-4207-be91-f2bb2c4a75c3"),
-                            Description = "Premium hrana za odrasle pse.",
-                            ImageUrl = "https://www.pet-centar.rs/cdn/shop/files/Obrok_u_kesici_2.png?v=1700562347&width=360",
-                            Name = "Granule za pse",
-                            Price = 29.99m,
-                            Stock = 50
-                        },
-                        new
-                        {
-                            ProductId = new Guid("55acbafe-f9fc-469c-bcac-66955609b9ea"),
-                            CategoryId = new Guid("c01542a0-7c26-495c-a15b-6365442aa50b"),
-                            Description = "Izdržljivi povodac za šetnju.",
-                            ImageUrl = "https://www.petbox.rs/sites/default/files/styles/product_teaser/public/product/images/crve.jpg?itok=rutNMX-W",
-                            Name = "Povodac",
-                            Price = 15.50m,
-                            Stock = 100
-                        });
+                    b.ToTable("Product");
                 });
 
             modelBuilder.Entity("WebShop.API.Models.Domain.CartItem", b =>
@@ -209,7 +237,7 @@ namespace WebShop.API.Migrations
                     b.HasOne("WebShop.API.Models.Domain.Product", "Product")
                         .WithMany("CartItems")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Cart");
@@ -228,7 +256,7 @@ namespace WebShop.API.Migrations
                     b.HasOne("WebShop.API.Models.Domain.Product", "Product")
                         .WithMany("OrderItems")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Order");
@@ -244,7 +272,13 @@ namespace WebShop.API.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("WebShop.API.Models.Domain.ApplicationUser", "Creator")
+                        .WithMany()
+                        .HasForeignKey("CreatorId");
+
                     b.Navigation("Category");
+
+                    b.Navigation("Creator");
                 });
 
             modelBuilder.Entity("WebShop.API.Models.Domain.Cart", b =>

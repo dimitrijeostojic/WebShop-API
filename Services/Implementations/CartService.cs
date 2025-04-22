@@ -10,13 +10,11 @@ namespace WebShop.API.Services.Implementations
     public class CartService : ICartService
     {
         private readonly ICartRepository cartRepository;
-        private readonly IOrderRepository orderRepository;
         private readonly ILogger<CartService> logger;
 
-        public CartService(ICartRepository cartRepository, IOrderRepository orderRepository, ILogger<CartService> logger)
+        public CartService(ICartRepository cartRepository, ILogger<CartService> logger)
         {
             this.cartRepository = cartRepository;
-            this.orderRepository = orderRepository;
             this.logger = logger;
         }
 

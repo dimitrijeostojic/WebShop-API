@@ -49,6 +49,7 @@ namespace WebShop.API.Controllers
         }
 
 
+
         [Authorize(Roles = "RegularUser")]
         [HttpPost("addItemToCart")]
         [ValidateModel]

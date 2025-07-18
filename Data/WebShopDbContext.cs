@@ -74,10 +74,12 @@ namespace WebShop.API.Data
             modelBuilder.Entity<OrderItem>().Property(oi => oi.Price).HasPrecision(18, 2);
 
 
-            #region Seedovanje kategorija i proizvoda
+            //#region Seedovanje kategorija i proizvoda
             //// Fixirani ID-jevi radi veze
             //var categoryFoodId = Guid.Parse("400cdda7-eb01-4207-be91-f2bb2c4a75c3");
             //var categoryGearId = Guid.Parse("c01542a0-7c26-495c-a15b-6365442aa50b");
+            //var categoryToysId = Guid.Parse("D145FD9A-FD96-477B-AE49-24936CCB00DD");
+            //var categoryCareId = Guid.Parse("31954536-64DF-467E-BF49-02E5CA4B3BB1");
             //var product1Id = Guid.Parse("2f7dd3d3-9097-49de-b750-119d10fe483a");
             //var product2Id = Guid.Parse("55acbafe-f9fc-469c-bcac-66955609b9ea");
 
@@ -94,6 +96,16 @@ namespace WebShop.API.Data
             //{
             //    CategoryId = categoryGearId,
             //    CategoryName = "Oprema"
+            //},
+            //new Category
+            //{
+            //    CategoryId = categoryToysId,
+            //    CategoryName = "Igracke"
+            //},
+            //new Category
+            //{
+            //    CategoryId = categoryCareId,
+            //    CategoryName = "Nega"
             //}
             //};
 
@@ -123,8 +135,8 @@ namespace WebShop.API.Data
             //        CategoryId = categoryGearId
             //    }
             //};
-            //modelBuilder.Entity<Product>().HasData(products); 
-            #endregion
+            //modelBuilder.Entity<Product>().HasData(products);
+            //#endregion
 
 
         }
